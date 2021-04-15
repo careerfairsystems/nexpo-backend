@@ -10,4 +10,4 @@ WORKDIR /app
 COPY . .
 RUN chmod +x entrypoint.sh
 
-CMD ./entrypoint.sh
+CMD /app/entrypoint.sh
