@@ -1,0 +1,34 @@
+version: 2
+updates:
+- package-ecosystem: mix
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: ex_aws
+    versions:
+    - 2.1.7
+    - 2.1.8
+    - 2.1.9
+    - 2.2.0
+  - dependency-name: bamboo
+    versions:
+    - 1.7.0
+    - 1.7.1
+    - 2.0.0
+    - 2.0.1
+    - 2.0.2
+  - dependency-name: hackney
+    versions:
+    - 1.17.0
+    - 1.17.1
+    - 1.17.2
+    - 1.17.3
+  - dependency-name: ex_machina
+    versions:
+    - 2.5.0
+    - 2.6.0
+  - dependency-name: excoveralls
+    versions:
+    - 0.13.4
