@@ -11,10 +11,12 @@ COPY . .
 
 # Install and compile dependencies
 RUN mix local.hex --force && \
-    mix local.rebar --force && \
-    mix deps.get && \
-    mix deps.compile && \
-    npm install
+	mix local.rebar --force && \
+	wget https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez && \
+	mix archive.install --force ./phoenix_new.ez && \
+	rm ./phoenix_new.ez && \
+	npm run install-deps && \
+	mkdir -p $(HOME)/.s3bucket/nexpo-test
 
 # Setup database and start dev server on image run
 CMD mix ecto.setup && \
