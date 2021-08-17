@@ -554,6 +554,52 @@
   },
   {
     "type": "GET",
+    "url": "/company/logo/:id",
+    "title": "Get company logo",
+    "group": "Company",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID of the company</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP 200 Ok\nimage",
+          "type": "image/png"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "web/controllers/company_controller.ex",
+    "groupTitle": "Company",
+    "name": "GetCompanyLogoId",
+    "error": {
+      "examples": [
+        {
+          "title": "Not Found",
+          "content": "HTTP 404 Not Found",
+          "type": "json"
+        },
+        {
+          "title": "Internal server error",
+          "content": "HTTP 500 Internal server error",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "GET",
     "url": "api/password/forgot/:key",
     "title": "Verify password forgotten",
     "group": "Forgot_password",
@@ -903,6 +949,52 @@
         {
           "title": "Bad Request",
           "content": "HTTP 400 Bad Request",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "GET",
+    "url": "/me/student/cv/:lang",
+    "title": "Get student CV",
+    "group": "Student",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "lang",
+            "description": "<p>The language you want the CV in (either &quot;sv&quot; or &quot;en&quot;)</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP 200 Ok\nimage",
+          "type": "image/png"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "web/controllers/student_controller.ex",
+    "groupTitle": "Student",
+    "name": "GetMeStudentCvLang",
+    "error": {
+      "examples": [
+        {
+          "title": "Not Found",
+          "content": "HTTP 404 Not Found",
+          "type": "json"
+        },
+        {
+          "title": "Internal server error",
+          "content": "HTTP 500 Internal server error",
           "type": "json"
         }
       ]
