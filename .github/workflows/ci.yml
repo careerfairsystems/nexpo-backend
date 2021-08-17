@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     services:
-      db:
+      postgres:
         image: postgres:13
         env:
           POSTGRES_USER: nexpo
