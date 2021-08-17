@@ -29,6 +29,12 @@ end
 
 alias Nexpo.Repo
 
+# Stop seeding if already done
+if Repo.get_by(Nexpo.User, email: "admin@test.com") do
+  IO.puts("Database already seeded")
+  exit(:shutdown)
+end
+
 # Create some users
 alias Nexpo.User
 

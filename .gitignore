@@ -2,6 +2,7 @@
 /_build
 /db
 /deps
+/docs
 /*.ez
 
 
@@ -27,7 +28,6 @@ cover/
 
 # Editor stuff
 .idea
-.vscode
 .elixir_ls/
 *.swp
 .DS_STORE

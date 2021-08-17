@@ -88,7 +88,8 @@ defmodule Nexpo.Mixfile do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      "ecto.seed": ["run priv/repo/seeds.exs"],
+      test: ["ecto.setup", "test --trace"]
     ]
   end
 end
