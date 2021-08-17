@@ -1,18 +1,21 @@
 {
   "scripts": {
-    "install-deps": "mix deps.get && npm install",
-    "dev-backend": "mix phx.server",
-    "dev": "npm run dev-backend",
-    "testwatch-backend": "mix test.watch",
-    "startS3": "s3rver -p 4567 --silent -d $HOME/.s3bucket &",
-    "stopS3": "kill $(pgrep -f s3rver)",
-    "test-backend": "npm run startS3 && MIX_ENV=test mix do compile, test --trace && npm run stopS3",
-    "test": "npm run test-backend",
-    "test-coverage-backend": "npm run startS3 && MIX_ENV=test mix do compile --warnings-as-errors, coveralls.json --trace && npm run stopS3",
-    "generate-docs": "apidoc -i web/ -o docs/",
-    "validate-editorconfig": "eclint check * 'web/**/*' 'test/**/*' 'lib/**/*' 'config/**/*' 'priv/repo/**/*'",
-    "update-toc-readme": "doctoc README.md --github",
-    "download-prod-db": "MIX_ENV=dev mix ecto.drop && heroku pg:pull -a arkad-nexpo DATABASE_URL nexpo_dev"
+    "setup": "npm install && mix local.hex --force && mix local.rebar --force && mix deps.get && mix deps.compile",
+    "dev": "mix ecto.setup && mix ecto.seed && mix phx.server",
+    "test": "mix compile && mix test",
+    "test-watch": "mix test.watch",
+    "docs": "apidoc -i web/ -o docs/",
+
+    "old-install-deps": "mix deps.get && npm install",
+    "old-testwatch-backend": "mix test.watch",
+    "old-startS3": "s3rver -p 4567 --silent -d $HOME/.s3bucket &",
+    "old-stopS3": "kill $(pgrep -f s3rver)",
+    "old-test": "npm run startS3 && MIX_ENV=test mix do compile, test --trace && npm run stopS3",
+    "old-test-coverage-backend": "npm run startS3 && MIX_ENV=test mix do compile --warnings-as-errors, coveralls.json --trace && npm run stopS3",
+    "old-generate-docs": "apidoc -i web/ -o docs/",
+    "old-validate-editorconfig": "eclint check * 'web/**/*' 'test/**/*' 'lib/**/*' 'config/**/*' 'priv/repo/**/*'",
+    "old-update-toc-readme": "doctoc README.md --github",
+    "old-download-prod-db": "MIX_ENV=dev mix ecto.drop && heroku pg:pull -a arkad-nexpo DATABASE_URL nexpo_dev"
   },
   "devDependencies": {
     "apidoc": "^0.17.7",
