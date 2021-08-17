@@ -43,6 +43,9 @@ defmodule Nexpo.Router do
       :delete_me
     )
 
+    get("/me/student/cv/:lang", StudentController, :get_cv)
+    get("/me/picture", UserController, :get_picture)
+
     put("/me/student_sessions/:id", StudentSessionController, :update_me)
     get("/me/company", CompanyController, :show_me)
     put("/me/company", CompanyController, :update_me)
@@ -99,6 +102,8 @@ defmodule Nexpo.Router do
 
     post("/login", SessionController, :create)
 
+    get("/company/logo/:id", CompanyController, :get_logo)
+    
     resources("/events", EventController, only: [:index])
     get("/event/:id", EventController, :get_event)
 

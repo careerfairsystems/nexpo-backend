@@ -10,13 +10,7 @@ WORKDIR /app
 COPY . .
 
 # Install and compile dependencies
-RUN mix local.hex --force && \
-    mix local.rebar --force && \
-    mix deps.get && \
-    mix deps.compile && \
-    npm install
+RUN npm run setup
 
-# Setup database and start dev server on image run
-CMD mix ecto.setup && \
-    mix run priv/repo/seeds.exs && \
-    npm run dev
+# Start dev server as default
+CMD npm run dev
