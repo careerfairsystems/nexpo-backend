@@ -20,7 +20,7 @@ jobs:
         run: npm ci
         
       - name: Build docs
-        run: npm run generate-docs
+        run: npm run docs
 
       - name: Deploy docs
         uses: JamesIves/github-pages-deploy-action@4.1.4
