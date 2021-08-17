@@ -54,7 +54,7 @@ defmodule Nexpo.Router do
 
     resources("/users", UserController, only: [:index, :show, :update, :delete])
     resources("/roles", RoleController)
-    get("/statistics", StatisticsController, :index)
+    resources("/statistics", StatisticsController, only: [:index])
 
     resources "/students", StudentController do
       # resources("/student_session_applications", StudentSessionApplicationController)
@@ -79,12 +79,18 @@ defmodule Nexpo.Router do
     resources("/student_sessions", StudentSessionController, only: [:create, :delete])
     patch("/student_sessions", StudentSessionController, :create_bulk)
     delete("/student_sessions", StudentSessionController, :delete_bulk)
+    get("/student_sessions", StudentSessionController, :show)
     get("/student_session_info", StudentSessionController, :show_all)
     get("/student_session_reserves", StudentSessionController, :show_reserves)
 
     resources("/me/company/blips", BlipController,
       only: [:create, :update, :show, :delete, :index]
     )
+
+    delete("/event/ticket/:id", EventController, :remove_ticket)
+    put("/event/ticket", EventController, :create_ticket)
+    get("/event/tickets", EventController, :get_tickets)
+    get("/admin/event/tickets", EventController, :get_all_tickets)
 
     # TODO implement
     # get("/me/company/reps", BlipController, :get_reps)
@@ -97,6 +103,9 @@ defmodule Nexpo.Router do
     post("/login", SessionController, :create)
 
     get("/company/logo/:id", CompanyController, :get_logo)
+    
+    resources("/events", EventController, only: [:index])
+    get("/event/:id", EventController, :get_event)
 
     post("/initial_signup", SignupController, :create)
     get("/initial_signup/:key", SignupController, :get_current_signup)
