@@ -23,7 +23,8 @@
 		"jakebecker.elixir-ls",
 		"mtxr.sqltools",
 		"mtxr.sqltools-driver-pg",
-		"humao.rest-client"
+		"humao.rest-client",
+		"editorconfig.editorconfig"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
