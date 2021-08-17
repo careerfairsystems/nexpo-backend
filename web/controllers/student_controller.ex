@@ -211,6 +211,26 @@ defmodule Nexpo.StudentController do
   end
 
   @apidoc """
+  @api {GET} /me/student/cv/:lang Get student CV
+  @apiGroup Student
+  @apiParam {String} lang The language you want the CV in (either "sv" or "en")
+  @apiSuccessExample {image/png} Success
+    HTTP 200 Ok
+    image
+  @apiUse NotFoundError
+  @apiUse InternalServerError
+  """
+  def get_cv(conn, %{"lang" => lang}, user, _claims) do
+    student = Repo.get_by!(Student, %{user_id: user.id})
+
+    path = "uploads/students/#{student.id}/cv/#{lang}/cv_#{lang}.pdf"
+
+    conn
+    |> put_resp_content_type("application/pdf")
+    |> send_file(200, path)
+  end
+
+  @apidoc """
   @api {DELETE} /api/students/:id Delete a student
   @apiGroup Roles
   @apiDescription Completely remove a student

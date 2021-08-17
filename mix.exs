@@ -61,7 +61,7 @@ defmodule Nexpo.Mixfile do
       {:ex_machina, "~> 2.0"},
       {:poison, "~> 2.0"},
       {:mix_test_watch, "~> 0.3", only: :dev, runtime: false},
-      {:cors_plug, "~> 1.3"},
+      {:cors_plug, "~> 2.0"},
       {:ex_json_schema, "~> 0.5.4"},
       {:sentry, "~> 7.0.0"},
       {:comeonin, "~> 4.0"},
@@ -88,7 +88,8 @@ defmodule Nexpo.Mixfile do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      "ecto.seed": ["run priv/repo/seeds.exs"],
+      test: ["ecto.setup", "test --trace"]
     ]
   end
 end
