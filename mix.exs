@@ -63,7 +63,7 @@ defmodule Nexpo.Mixfile do
       {:mix_test_watch, "~> 0.3", only: :dev, runtime: false},
       {:cors_plug, "~> 2.0"},
       {:ex_json_schema, "~> 0.5.4"},
-      {:sentry, "~> 7.0.0"},
+      {:sentry, "~> 7.2.5"},
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 0.12"},
       {:guardian, "~> 0.14.5"},
