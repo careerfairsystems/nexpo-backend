@@ -9,7 +9,7 @@ jobs:
   test:
     services:
       postgres:
-        image: postgres:13
+        image: postgres:10.10
         env:
           POSTGRES_USER: nexpo
           POSTGRES_PASSWORD: nexpo
