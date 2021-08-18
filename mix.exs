@@ -65,7 +65,7 @@ defmodule Nexpo.Mixfile do
       {:ex_json_schema, "~> 0.5.4"},
       {:sentry, "~> 7.0.0"},
       {:comeonin, "~> 4.0"},
-      {:bcrypt_elixir, "~> 0.12"},
+      {:bcrypt_elixir, "~> 1.1"},
       {:guardian, "~> 0.14.5"},
       {:bamboo, "~> 0.8"},
       {:excoveralls, "~> 0.7", only: :test},
