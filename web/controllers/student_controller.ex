@@ -50,8 +50,8 @@ defmodule Nexpo.StudentController do
   @apidoc """
   @api {POST} /api/students Create a student
   @apiGroup Students
-  @apiDescription Create a student 
-  @apiParam {json} student   Nested JSON object containing below fields 
+  @apiDescription Create a student
+  @apiParam {json} student   Nested JSON object containing below fields
   @apiParam {Integer}  student.year   Optional, Enrollment year
   @apiParam {String}  student.master   Optional, Programme (C, D, E etc.)
   @apiParam {String}  student.linked_in   Optional, LinkedIn link
@@ -101,7 +101,7 @@ defmodule Nexpo.StudentController do
   @apiSuccessExample {json} Success
 
   HTTP 200 OK
- 
+
 
   @apiUse NotFoundError
   @apiUse BadRequestError
@@ -126,16 +126,16 @@ defmodule Nexpo.StudentController do
   @api {PUT} /api/me/student Update info
   @apiGroup Student
   @apiDescription  Update student info
-  @apiParam {json} student   Nested JSON object containing below fields 
+  @apiParam {json} student   Nested JSON object containing below fields
   @apiParam {Integer}  student.year   Optional, Enrollment year
   @apiParam {String}  student.master   Optional, Programme (C, D, E etc.)
   @apiParam {String}  student.linked_in   Optional, LinkedIn link
   @apiParam {String}  student.resume_en_url   Optional, Resume in english link
   @apiParam {String}  student.resume_sv_url   Optional, Resume in swedish link
   @apiSuccessExample {json} Success
-  
+
   HTTP 200 OK
-  
+
   @apiUse BadRequestError
   @apiUse UnprocessableEntity
   """
@@ -161,16 +161,16 @@ defmodule Nexpo.StudentController do
   @api {PUT} /api/me/student Update info
   @apiGroup Student
   @apiDescription  Update your own info as student
-  @apiParam {json} student   Nested JSON object containing below fields 
+  @apiParam {json} student   Nested JSON object containing below fields
   @apiParam {Integer}  student.year   Optional, Enrollment year
   @apiParam {String}  student.master   Optional, Programme (C, D, E etc.)
   @apiParam {String}  student.linked_in   Optional, LinkedIn link
   @apiParam {String}  student.resume_en_url   Optional, Resume in english link
   @apiParam {String}  student.resume_sv_url   Optional, Resume in swedish link
   @apiSuccessExample {json} Success
-  
+
   HTTP 200 OK
-  
+
   @apiUse BadRequestError
   @apiUse UnprocessableEntity
   """
@@ -211,7 +211,7 @@ defmodule Nexpo.StudentController do
   end
 
   @apidoc """
-  @api {GET} /me/student/cv/:lang Get student CV
+  @api {GET} /api/me/student/cv/:lang Get student CV
   @apiGroup Student
   @apiParam {String} lang The language you want the CV in (either "sv" or "en")
   @apiSuccessExample {image/png} Success

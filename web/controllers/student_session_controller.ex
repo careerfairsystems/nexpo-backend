@@ -30,7 +30,7 @@ defmodule Nexpo.StudentSessionController do
   @api {POST} /api/student_sessions Create a student session
   @apiGroup Student sessions
   @apiDescription Create a student session
-  @apiParam {json} student_session   Nested JSON object containing below fields 
+  @apiParam {json} student_session   Nested JSON object containing below fields
   @apiParam {Integer} student_session.student_session_status   Optional, States- 0: not confirmed, 1: confirmed, 2: declined)
   @apiParam {Integer} student_session.company_id   Id of company
   @apiParam {Integer} student_session.student_id   Id of student
@@ -161,7 +161,7 @@ defmodule Nexpo.StudentSessionController do
   end
 
   @apidoc """
-  @api {GET} /student_session_reserves List all reserves for all student sessions 
+  @api {GET} /api/student_session_reserves List all reserves for all student sessions
   @apiGroup Student sessions
   @apiSuccessExample {String} Success
     HTTP 200 Ok
@@ -203,7 +203,7 @@ defmodule Nexpo.StudentSessionController do
   end
 
   @apidoc """
-  @api {GET} /student_session_info List all accepted student sessions 
+  @api {GET} /api/student_session_info List all accepted student sessions
   @apiGroup Student sessions
   @apiSuccessExample {String} Success
     HTTP 200 Ok
@@ -316,11 +316,11 @@ defmodule Nexpo.StudentSessionController do
   end
 
   @apidoc """
-  @api {PUT} /me/student_sessions/:id Update student session
+  @api {PUT} /api/me/student_sessions/:id Update student session
   @apiGroup Student sessions
   @apiDescription Update a student session
   @apiParam {Integer} id    The session id
-  @apiParam {json} student_session   Nested JSON object containing below fields 
+  @apiParam {json} student_session   Nested JSON object containing below fields
   @apiParam {Integer} student_session.student_session_status   States- 0: not confirmed, 1: confirmed, 2: declined)
   @apiParam {Integer} student_session.company_id   Id of company
   @apiParam {Integer} student_session.student_id   Id of student

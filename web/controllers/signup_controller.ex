@@ -20,7 +20,7 @@ defmodule Nexpo.SignupController do
   )
 
   @apidoc """
-  @api {POST} /initial_signup Initiate sign up
+  @api {POST} /api/initial_signup Initiate sign up
   @apiGroup Sign up
 
   @apiParam {String} email
@@ -119,7 +119,7 @@ defmodule Nexpo.SignupController do
   end
 
   @apidoc """
-  @api {GET} /initial_signup/:signup_key Get current signup
+  @api {GET} /api/initial_signup/:signup_key Get current signup
   @apiGroup Sign up
 
   @apiParam {String} signup_key Signup key of user
@@ -152,7 +152,7 @@ defmodule Nexpo.SignupController do
   end
 
   @apidoc """
-  @api {POST} /final_signup/:signup_key Finish sign up
+  @api {POST} /api/final_signup/:signup_key Finish sign up
   @apiGroup Sign up
 
   @apiParam {String}  signup_key             Signup key of user

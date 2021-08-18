@@ -25,7 +25,7 @@ defmodule Nexpo.CompanyController do
   )
 
   @apidoc """
-  @api {GET} /companies List companies
+  @api {GET} /api/companies List companies
   @apiGroup Company
   @apiSuccessExample {json} Success
     HTTP 200 Ok
@@ -53,8 +53,8 @@ defmodule Nexpo.CompanyController do
   @apidoc """
   @api {POST} /api/companies Create a company
   @apiGroup Company
-  @apiDescription Create a company 
-  @apiParam {json} company   Nested JSON object containing below fields 
+  @apiDescription Create a company
+  @apiParam {json} company   Nested JSON object containing below fields
   @apiParam {String} company.name   Name of company
   @apiParam {String} company.description   Description of company
   @apiParam {String} company.website   URL of company
@@ -104,7 +104,7 @@ defmodule Nexpo.CompanyController do
   @api {POST} /api/companies/create_bulk Create companies and representatives
   @apiGroup Company
   @apiDescription Create companies and associated representatives in bulk
-  @apiParam {json} companies   Nested JSON object containing multiple company_params 
+  @apiParam {json} companies   Nested JSON object containing multiple company_params
   @apiParam {String} companies.company1.name   Name of company1
   @apiParam {String} companies.company1.description   Description of company
   @apiParam {String} companies.company1.website   URL of company
@@ -187,7 +187,7 @@ defmodule Nexpo.CompanyController do
   end
 
   @apidoc """
-  @api {GET} /companies/:id Get company
+  @api {GET} /api/companies/:id Get company
   @apiGroup Company
   @apiParam {Number} id ID of the company
   @apiSuccessExample {json} Success
@@ -240,7 +240,7 @@ defmodule Nexpo.CompanyController do
   @api {PUT} /api/companies/:id Update a company
   @apiGroup Companies
   @apiDescription Update a company
-  @apiParam {json} company   Nested JSON object containing below fields 
+  @apiParam {json} company   Nested JSON object containing below fields
   @apiParam {String} company.name   Optional, Name of company
   @apiParam {String} company.description   Optional, Description of company
   @apiParam {String} company.website   Optional, URL of company
@@ -310,7 +310,7 @@ defmodule Nexpo.CompanyController do
   end
 
   @apidoc """
-  @api {GET} /me/company Get company and related information
+  @api {GET} /api/me/company Get company and related information
   @apiGroup Company
   @apiDescription As a representative, get company information, student applications and more
   @apiSuccessExample {json} Success
@@ -345,10 +345,10 @@ defmodule Nexpo.CompanyController do
   end
 
   @apidoc """
-  @api {PUT} /me/company Update company website and description
+  @api {PUT} /api/me/company Update company website and description
   @apiGroup Company
   @apiDescription As a representative, update company website and description
-  @apiParam {json} company   Nested JSON object containing below fields 
+  @apiParam {json} company   Nested JSON object containing below fields
   @apiParam {String} company.description   Description of company
   @apiParam {String} company.website   Company URL
   @apiSuccessExample {json} Success
@@ -409,7 +409,7 @@ defmodule Nexpo.CompanyController do
   end
 
   @apidoc """
-  @api {DELETE} /me/company Delete company completely
+  @api {DELETE} /api/me/company Delete company completely
   @apiGroup Company
   @apiDescription As a representative, delete company
   @apiSuccessExample {json} Success
@@ -448,7 +448,7 @@ defmodule Nexpo.CompanyController do
   end
 
   @apidoc """
-  @api {GET} /company/logo/:id Get company logo
+  @api {GET} /api/company/logo/:id Get company logo
   @apiGroup Company
   @apiParam {Number} id ID of the company
   @apiSuccessExample {image/png} Success

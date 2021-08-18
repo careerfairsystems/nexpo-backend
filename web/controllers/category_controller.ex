@@ -23,7 +23,7 @@ defmodule Nexpo.CategoryController do
   )
 
   @apidoc """
-  @api {GET} /categories List categories
+  @api {GET} /api/categories List categories
   @apiGroup Category
 
   @apiSuccessExample {json} Success
@@ -52,7 +52,7 @@ defmodule Nexpo.CategoryController do
   end
 
   @apidoc """
-  @api {POST} /categories/ Create category
+  @api {POST} /api/categories/ Create category
   @apiName Create Category
   @apiGroup Category
 
@@ -83,7 +83,7 @@ defmodule Nexpo.CategoryController do
   end
 
   @apidoc """
-  @api {GET} /categories/:id Get category
+  @api {GET} /api/categories/:id Get category
   @apiGroup Category
 
   @apiParam {Number} id ID of the category
