@@ -4,7 +4,7 @@ defmodule Nexpo.SessionController do
   alias Nexpo.{User}
 
   @apidoc """
-  @api {POST} /login Login
+  @api {POST} /api/login Login
   @apiGroup Login
 
   @apiParam {String} email      Username
