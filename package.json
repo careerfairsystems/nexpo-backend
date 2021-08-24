@@ -5,7 +5,6 @@
     "test": "mix compile && mix test",
     "test-watch": "mix test.watch",
     "docs": "apidoc -i web/ -o docs/",
-
     "old-install-deps": "mix deps.get && npm install",
     "old-testwatch-backend": "mix test.watch",
     "old-startS3": "s3rver -p 4567 --silent -d $HOME/.s3bucket &",
