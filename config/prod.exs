@@ -85,6 +85,8 @@ config :guardian, Guardian, secret_key: System.get_env("SECRET_KEY_BASE")
 # We are not doing this, since we use config vars instead
 # import_config "prod.secret.exs"
 
+config :nexpo, :environment, :prod
+
 # Configure database
 config :nexpo, Nexpo.Repo,
   adapter: Ecto.Adapters.Postgres,

@@ -230,6 +230,20 @@ defmodule Nexpo.StudentController do
     |> send_file(200, path)
   end
 
+  def get_cv2(conn, %{"id" => company_id, "lang" => lang, "key" => image_key}, _user, _claims) do
+    s3_resource_key = "uploads/students/#{company_id}/cv/#{lang}/#{image_key}"
+
+    case ExAws.S3.get_object("nexpo-" <> "#{Mix.env()}", s3_resource_key) |> ExAws.request() do
+      {:ok, resp} ->
+        conn
+        |> put_resp_content_type("application/pdf")
+        |> send_resp(:ok, resp.body)
+
+      {:error, _resp} ->
+        send_resp(conn, :not_found, "")
+    end
+  end
+
   @apidoc """
   @api {DELETE} /api/students/:id Delete a student
   @apiGroup Roles

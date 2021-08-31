@@ -1,5 +1,6 @@
 # App artifacts
 /_build
+/s3bucket
 /db
 /deps
 /docs

@@ -87,14 +87,14 @@ defmodule Nexpo.CompanyControllerTest do
     refute Repo.get(Company, company.id)
   end
 
-  #@tag :logged_in
-  #test "create company with logo_url and upload image", %{conn: conn} do
-  #  logo_url = %Plug.Upload{path: "test/assets/placeholder.png", filename: "placeholder.png"}
-  #  attrs = %{@valid_attrs | logo_url: logo_url}
-  #  conn = post(conn, company_path(conn, :create), company: attrs)
-  #  assert json_response(conn, 201)["data"]["id"]
-  #  assert Repo.get_by(Company, %{name: @valid_attrs.name})
-  #end
+  @tag :logged_in
+  test "create company with logo_url and upload image", %{conn: conn} do
+    logo_url = %Plug.Upload{path: "test/assets/placeholder.png", filename: "placeholder.png"}
+    attrs = %{@valid_attrs | logo_url: logo_url}
+    conn = post(conn, company_path(conn, :create), company: attrs)
+    assert json_response(conn, 201)["data"]["id"]
+    assert Repo.get_by(Company, %{name: @valid_attrs.name})
+  end
 
   @tag :logged_in
   test "create company with invalid file format gives error", %{conn: conn} do

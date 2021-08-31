@@ -42,14 +42,29 @@ config :phoenix, :stacktrace_depth, 20
 
 config :nexpo, Nexpo.Mailer, adapter: Bamboo.LocalAdapter
 
+config :nexpo, :environment, :dev
+
 # Configure your database
 config :nexpo, Nexpo.Repo,
   adapter: Ecto.Adapters.Postgres,
-  database: "nexpo",
+  database: "nexpo-dev",
   pool_size: 10,
   username: "nexpo",
   password: "nexpo"
 
 config :arc,
   # or Arc.Storage.Local
-  storage: Arc.Storage.Local
+  storage: Arc.Storage.S3,
+  bucket: "nexpo-dev",
+  # if using Amazon S3
+  virtual_host: true
+
+config :ex_aws,
+  access_key_id: "S3RVER",
+  secret_access_key: "S3RVER",
+  region: "fakes3"
+
+config :ex_aws, :s3,
+  scheme: "http://",
+  host: "localhost",
+  port: 4567

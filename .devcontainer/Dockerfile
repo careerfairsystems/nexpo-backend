@@ -40,6 +40,8 @@ RUN apt-get update \
   #
   # Install dependencies
   && apt-get install -y build-essential \
+  && apt install -y ruby-full \
+  && gem install fakes3 \
   #
   # Clean up
   && apt-get autoremove -y \

@@ -103,7 +103,11 @@ defmodule Nexpo.Router do
     post("/login", SessionController, :create)
 
     get("/company/logo/:id", CompanyController, :get_logo)
-    
+
+    get("/uploads/users/:id/image/:key", UserController, :get_picture2)
+    get("/uploads/companies/:id/logo/:key", CompanyController, :get_logo2)
+    get("/uploads/students/:id/cv/:lang/:key", StudentController, :get_cv2)
+
     resources("/events", EventController, only: [:index])
     get("/event/:id", EventController, :get_event)
 

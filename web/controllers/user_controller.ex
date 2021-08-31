@@ -195,7 +195,7 @@ defmodule Nexpo.UserController do
   @api {PUT} api/users Update company website and description
   @apiGroup User
   @apiDescription As a representative, update company website and description
-  @apiParam {json} company   Nested JSON object containing below fields 
+  @apiParam {json} company   Nested JSON object containing below fields
   @apiParam {String} company.description   Description of company
   @apiParam {String} company.website   Company URL
   @apiSuccessExample {json} Success
@@ -559,6 +559,20 @@ defmodule Nexpo.UserController do
     conn
     |> put_resp_content_type("image/png")
     |> send_file(200, path)
+  end
+
+  def get_picture2(conn, %{"id" => user_id, "key" => image_key}, _user, _claims) do
+    s3_resource_key = "uploads/users/#{user_id}/image/#{image_key}"
+
+    case ExAws.S3.get_object("nexpo-" <> "#{Mix.env()}", s3_resource_key) |> ExAws.request() do
+      {:ok, resp} ->
+        conn
+        |> put_resp_content_type("image/png")
+        |> send_resp(:ok, resp.body)
+
+      {:error, _resp} ->
+        send_resp(conn, :not_found, "")
+    end
   end
 
   @apidoc

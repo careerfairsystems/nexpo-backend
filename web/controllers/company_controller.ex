@@ -466,5 +466,19 @@ defmodule Nexpo.CompanyController do
     |> send_file(200, path)
   end
 
+  def get_logo2(conn, %{"id" => company_id, "key" => image_key}, _user, _claims) do
+    s3_resource_key = "uploads/companies/#{company_id}/logo/#{image_key}"
+
+    case ExAws.S3.get_object("nexpo-" <> "#{Mix.env()}", s3_resource_key) |> ExAws.request() do
+      {:ok, resp} ->
+        conn
+        |> put_resp_content_type("image/png")
+        |> send_resp(:ok, resp.body)
+
+      {:error, _resp} ->
+        send_resp(conn, :not_found, "")
+    end
+  end
+
   @apidoc
 end
