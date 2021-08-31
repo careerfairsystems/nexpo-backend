@@ -17,7 +17,8 @@ defmodule Nexpo.EventView do
       :start,
       :end,
       :location,
-      :tickets_left
+      :tickets,
+      :capacity
     ]
 
     Nexpo.Support.View.render_object(event, base)

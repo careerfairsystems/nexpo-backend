@@ -9,7 +9,7 @@ defmodule Nexpo.EventInfo do
     field(:host, :string)
     field(:description, :string)
     field(:language, :string)
-    field(:tickets, :integer, default: 0)
+    field(:capacity, :integer, default: 0)
 
     belongs_to(:event, Nexpo.Event, foreign_key: :event_id)
 
@@ -22,7 +22,7 @@ defmodule Nexpo.EventInfo do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:event_id, :host, :description])
-    |> cast(params, [:tickets])
+    |> cast(params, [:capacity])
     |> validate_required([:event_id])
     |> foreign_key_constraint(:event_id)
   end
