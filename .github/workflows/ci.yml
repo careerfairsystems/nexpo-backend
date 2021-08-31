@@ -13,7 +13,7 @@ jobs:
         env:
           POSTGRES_USER: nexpo
           POSTGRES_PASSWORD: nexpo
-          POSTGRES_DB: nexpo
+          POSTGRES_DB: nexpo-test
         ports:
         - 5432:5432
         # needed because the postgres container does not provide a healthcheck
@@ -32,6 +32,14 @@ jobs:
         elixir-version: '1.10.3'
         otp-version: '22.3'
 
+    - name: Set up Ruby
+        uses: ruby/setup-ruby@477b21f02be01bcb8030d50f37cfec92bfa615b6
+        with:
+          ruby-version: 2.6
+
+    - name: Install fakes3
+      run: gem install fakes3
+
     - name: Set up NPM
       uses: actions/setup-node@v2
 
@@ -46,4 +54,4 @@ jobs:
       run: npm run setup
 
     - name: Run tests
-      run: npm test
+      run: npm run old-test
