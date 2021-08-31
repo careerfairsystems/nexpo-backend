@@ -252,6 +252,21 @@ defmodule Nexpo.UserController do
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
+    if user.profile_image do
+      ProfileImage.delete({user.profile_image, user})
+    end
+
+    student_user = Repo.preload(user, :student)
+    if student_user.student do
+      student = student_user.student
+      if student.resume_en_url do
+        Nexpo.CvEn.delete({student.resume_en_url, student})
+      end
+      if student.resume_sv_url do
+        Nexpo.CvSv.delete({student.resume_sv_url, student})
+      end
+    end
+
     Repo.delete!(user)
 
     send_resp(conn, :no_content, "")
@@ -401,6 +416,22 @@ defmodule Nexpo.UserController do
   def delete_me(conn, %{}, user, _claims) do
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
+
+    if user.profile_image do
+      ProfileImage.delete({user.profile_image, user})
+    end
+
+    student_user = Repo.preload(user, :student)
+    if student_user.student do
+      student = student_user.student
+      if student.resume_en_url do
+        Nexpo.CvEn.delete({student.resume_en_url, student})
+      end
+      if student.resume_sv_url do
+        Nexpo.CvSv.delete({student.resume_sv_url, student})
+      end
+    end
+
     Repo.delete!(user)
 
     send_resp(conn, :no_content, "")
@@ -545,7 +576,8 @@ defmodule Nexpo.UserController do
     case Map.get(params, Atom.to_string(attr)) do
       nil ->
         case attr do
-          :profile_image -> ProfileImage.delete({file, model})
+          :profile_image ->
+            ProfileImage.delete({file, model})
         end
 
       _ ->

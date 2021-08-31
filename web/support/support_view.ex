@@ -183,7 +183,4 @@ defmodule Nexpo.Support.View do
     {file_name, object}
   end
 
-  defp get_filename(object, attribute) do
-    Map.from_struct(object) |> get_in([attribute, :file_name])
-  end
 end

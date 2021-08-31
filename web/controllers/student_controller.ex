@@ -261,6 +261,12 @@ defmodule Nexpo.StudentController do
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
+    if student.resume_en_url do
+      CvEn.delete({student.resume_en_url, student})
+    end
+    if student.resume_sv_url do
+      CvSv.delete({student.resume_sv_url, student})
+    end
     Repo.delete!(student)
 
     send_resp(conn, :no_content, "")
