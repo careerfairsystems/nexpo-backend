@@ -3,6 +3,9 @@ use Mix.Config
 config :nexpo,
   frontend_url: "http://localhost:3000"
 
+config :nexpo,
+  backend_url: "http://localhost:4000"
+
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :nexpo, Nexpo.Endpoint,

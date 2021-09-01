@@ -143,7 +143,7 @@ defmodule Nexpo.Support.View do
             %{:logo_url => nil}
 
           url ->
-            %{:logo_url => "http://localhost:4000/api/uploads" <> Enum.at(String.split(url, "uploads"), 1)}
+            %{:logo_url => Application.get_env(:nexpo, :backend_url) <> "/api/uploads" <> Enum.at(String.split(url, "uploads"), 1)}
         end
 
       :profile_image ->
@@ -152,7 +152,7 @@ defmodule Nexpo.Support.View do
             %{:profile_image => nil}
 
           url ->
-            %{:profile_image => "http://localhost:4000/api/uploads" <> Enum.at(String.split(url, "uploads"), 1)}
+            %{:profile_image => Application.get_env(:nexpo, :backend_url) <> "/api/uploads" <> Enum.at(String.split(url, "uploads"), 1)}
         end
 
       :resume_en_url ->
@@ -161,7 +161,7 @@ defmodule Nexpo.Support.View do
             %{:resume_en_url => nil}
 
           url ->
-            %{:resume_en_url => "http://localhost:4000/api/uploads" <> Enum.at(String.split(url, "uploads"), 1)}
+            %{:resume_en_url => Application.get_env(:nexpo, :backend_url) <> "/api/uploads" <> Enum.at(String.split(url, "uploads"), 1)}
         end
 
       :resume_sv_url ->
@@ -170,7 +170,7 @@ defmodule Nexpo.Support.View do
             %{:resume_sv_url => nil}
 
           url ->
-            %{:resume_sv_url => "http://localhost:4000/api/uploads" <> Enum.at(String.split(url, "uploads"), 1)}
+            %{:resume_sv_url => Application.get_env(:nexpo, :backend_url) <> "/api/uploads" <> Enum.at(String.split(url, "uploads"), 1)}
         end
 
       _ ->
