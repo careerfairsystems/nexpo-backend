@@ -195,7 +195,7 @@ defmodule Nexpo.UserController do
   @api {PUT} api/users Update company website and description
   @apiGroup User
   @apiDescription As a representative, update company website and description
-  @apiParam {json} company   Nested JSON object containing below fields 
+  @apiParam {json} company   Nested JSON object containing below fields
   @apiParam {String} company.description   Description of company
   @apiParam {String} company.website   Company URL
   @apiSuccessExample {json} Success
@@ -252,6 +252,21 @@ defmodule Nexpo.UserController do
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
+    if user.profile_image do
+      ProfileImage.delete({user.profile_image, user})
+    end
+
+    student_user = Repo.preload(user, :student)
+    if student_user.student do
+      student = student_user.student
+      if student.resume_en_url do
+        Nexpo.CvEn.delete({student.resume_en_url, student})
+      end
+      if student.resume_sv_url do
+        Nexpo.CvSv.delete({student.resume_sv_url, student})
+      end
+    end
+
     Repo.delete!(user)
 
     send_resp(conn, :no_content, "")
@@ -401,6 +416,22 @@ defmodule Nexpo.UserController do
   def delete_me(conn, %{}, user, _claims) do
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
+
+    if user.profile_image do
+      ProfileImage.delete({user.profile_image, user})
+    end
+
+    student_user = Repo.preload(user, :student)
+    if student_user.student do
+      student = student_user.student
+      if student.resume_en_url do
+        Nexpo.CvEn.delete({student.resume_en_url, student})
+      end
+      if student.resume_sv_url do
+        Nexpo.CvSv.delete({student.resume_sv_url, student})
+      end
+    end
+
     Repo.delete!(user)
 
     send_resp(conn, :no_content, "")
@@ -545,7 +576,8 @@ defmodule Nexpo.UserController do
     case Map.get(params, Atom.to_string(attr)) do
       nil ->
         case attr do
-          :profile_image -> ProfileImage.delete({file, model})
+          :profile_image ->
+            ProfileImage.delete({file, model})
         end
 
       _ ->
@@ -559,6 +591,20 @@ defmodule Nexpo.UserController do
     conn
     |> put_resp_content_type("image/png")
     |> send_file(200, path)
+  end
+
+  def get_picture2(conn, %{"id" => user_id, "key" => image_key}, _user, _claims) do
+    s3_resource_key = "uploads/users/#{user_id}/image/#{image_key}"
+
+    case ExAws.S3.get_object("nexpo-" <> "#{Mix.env()}", s3_resource_key) |> ExAws.request() do
+      {:ok, resp} ->
+        conn
+        |> put_resp_content_type("image/png")
+        |> send_resp(:ok, resp.body)
+
+      {:error, _resp} ->
+        send_resp(conn, :not_found, "")
+    end
   end
 
   @apidoc

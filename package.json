@@ -1,17 +1,16 @@
 {
   "scripts": {
     "setup": "npm install && mix local.hex --force && mix local.rebar --force && mix deps.get && mix deps.compile",
-    "dev": "mix ecto.setup && mix ecto.seed && mix phx.server",
+    "dev": "npm run old-startS3 & mix ecto.setup && mix ecto.seed && mix phx.server && npm run old-stopS3",
     "test": "mix compile && mix test",
     "test-watch": "mix test.watch",
     "docs": "apidoc -i web/ -o docs/",
-
     "old-install-deps": "mix deps.get && npm install",
     "old-testwatch-backend": "mix test.watch",
-    "old-startS3": "s3rver -p 4567 --silent -d $HOME/.s3bucket &",
-    "old-stopS3": "kill $(pgrep -f s3rver)",
-    "old-test": "npm run startS3 && MIX_ENV=test mix do compile, test --trace && npm run stopS3",
-    "old-test-coverage-backend": "npm run startS3 && MIX_ENV=test mix do compile --warnings-as-errors, coveralls.json --trace && npm run stopS3",
+    "old-startS3": "fakes3 -r ./s3bucket -p 4567 --license 9806002125 &",
+    "old-stopS3": "rm -rf ./s3bucket/nexpo-test && kill $(pgrep -f fakes3)",
+    "old-test": "npm run old-startS3 && MIX_ENV=test mix do compile, test --trace && npm run old-stopS3",
+    "old-test-coverage-backend": "npm run old-startS3 && MIX_ENV=test mix do compile --warnings-as-errors, coveralls.json --trace && npm run old-stopS3",
     "old-generate-docs": "apidoc -i web/ -o docs/",
     "old-validate-editorconfig": "eclint check * 'web/**/*' 'test/**/*' 'lib/**/*' 'config/**/*' 'priv/repo/**/*'",
     "old-update-toc-readme": "doctoc README.md --github",
@@ -21,11 +20,11 @@
     "apidoc": "^0.17.7",
     "doctoc": "^1.4.0",
     "eclint": "^2.8.1",
-    "extend": "^3.0.2",
-    "s3rver": "^3.6.1"
+    "extend": "^3.0.2"
   },
   "engines": {
     "node": "12.18.2",
     "npm": ">6.14.5"
-  }
+  },
+  "dependencies": {}
 }

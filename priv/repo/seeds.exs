@@ -499,7 +499,7 @@ alias Nexpo.EventInfo
 event_info1 =
   Repo.insert!(%EventInfo{
     description: "Placeholder",
-    tickets: 20
+    capacity: 20
   })
 
 event_info2 =
@@ -507,7 +507,7 @@ event_info2 =
     description: "Placeholder",
     host: "Nicholas Fernholm",
     language: "English",
-    tickets: 20
+    capacity: 20
   })
 
 event_info3 =
@@ -515,7 +515,7 @@ event_info3 =
     description: "Placeholder",
     host: "Hasse Brontén",
     language: "Swedish",
-    tickets: 20
+    capacity: 20
   })
 
 event_info4 =
@@ -523,7 +523,7 @@ event_info4 =
     description: "Placeholder",
     host: "Pamela Von Sabljar",
     language: "Swedish",
-    tickets: 20
+    capacity: 20
   })
 
 EventInfo.build_assoc!(event_info1, 1)

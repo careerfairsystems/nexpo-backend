@@ -84,24 +84,24 @@ defmodule Nexpo.StudentControllerTest do
     refute Repo.get(Student, student.id)
   end
 
-  #@tag :logged_in
-  #test "update student with resume_sv_url and resume_sv_url", %{conn: conn} do
-  #  resume_sv_url = %Plug.Upload{path: "test/assets/placeholder.pdf", filename: "placeholder.pdf"}
-  #  resume_en_url = %Plug.Upload{path: "test/assets/placeholder.pdf", filename: "placeholder.pdf"}
-  #  user = Repo.insert!(%User{email: "admin@test.com"})
-  #  student = Repo.insert!(%Student{})
+  @tag :logged_in
+  test "update student with resume_sv_url and resume_sv_url", %{conn: conn} do
+    resume_sv_url = %Plug.Upload{path: "test/assets/placeholder.pdf", filename: "placeholder.pdf"}
+    resume_en_url = %Plug.Upload{path: "test/assets/placeholder.pdf", filename: "placeholder.pdf"}
+    user = Repo.insert!(%User{email: "admin@test.com"})
+    student = Repo.insert!(%Student{})
 
-  #  attrs = %{
-  #    @valid_attrs
-  #    | user_id: user.id,
-  #      resume_sv_url: resume_sv_url,
-  #      resume_en_url: resume_en_url
-  #  }
+    attrs = %{
+      @valid_attrs
+      | user_id: user.id,
+        resume_sv_url: resume_sv_url,
+        resume_en_url: resume_en_url
+    }
 
-  #  conn = put(conn, student_path(conn, :update, student), student: attrs)
-  #  assert json_response(conn, 200)["data"]["id"]
-  #  assert Repo.get_by(Student, %{user_id: user.id})
-  #end
+    conn = put(conn, student_path(conn, :update, student), student: attrs)
+    assert json_response(conn, 200)["data"]["id"]
+    assert Repo.get_by(Student, %{user_id: user.id})
+  end
 
   @tag :logged_in
   test "update student with cv that is not pdf gives error", %{conn: conn} do

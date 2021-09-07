@@ -230,6 +230,20 @@ defmodule Nexpo.StudentController do
     |> send_file(200, path)
   end
 
+  def get_cv2(conn, %{"id" => company_id, "lang" => lang, "key" => image_key}, _user, _claims) do
+    s3_resource_key = "uploads/students/#{company_id}/cv/#{lang}/#{image_key}"
+
+    case ExAws.S3.get_object("nexpo-" <> "#{Mix.env()}", s3_resource_key) |> ExAws.request() do
+      {:ok, resp} ->
+        conn
+        |> put_resp_content_type("application/pdf")
+        |> send_resp(:ok, resp.body)
+
+      {:error, _resp} ->
+        send_resp(conn, :not_found, "")
+    end
+  end
+
   @apidoc """
   @api {DELETE} /api/students/:id Delete a student
   @apiGroup Roles
@@ -247,6 +261,12 @@ defmodule Nexpo.StudentController do
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
+    if student.resume_en_url do
+      CvEn.delete({student.resume_en_url, student})
+    end
+    if student.resume_sv_url do
+      CvSv.delete({student.resume_sv_url, student})
+    end
     Repo.delete!(student)
 
     send_resp(conn, :no_content, "")

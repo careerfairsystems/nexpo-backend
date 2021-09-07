@@ -304,6 +304,9 @@ defmodule Nexpo.CompanyController do
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
+    if company.logo_url do
+      Nexpo.CompanyLogo.delete({company.logo_url, company})
+    end
     Repo.delete!(company)
 
     send_resp(conn, :no_content, "")
@@ -421,8 +424,11 @@ defmodule Nexpo.CompanyController do
   """
   def delete_me(conn, %{}, user, _claims) do
     representative = Repo.get_by!(Representative, %{user_id: user.id})
-    company = Ecto.assoc(representative, :company)
+    company = Repo.get!(Company, representative.company_id)
 
+    if company.logo_url do
+      Nexpo.CompanyLogo.delete({company.logo_url, company})
+    end
     Repo.delete!(company)
 
     send_resp(conn, :no_content, "")
@@ -464,6 +470,20 @@ defmodule Nexpo.CompanyController do
     conn
     |> put_resp_content_type("image/png")
     |> send_file(200, path)
+  end
+
+  def get_logo2(conn, %{"id" => company_id, "key" => image_key}, _user, _claims) do
+    s3_resource_key = "uploads/companies/#{company_id}/logo/#{image_key}"
+
+    case ExAws.S3.get_object("nexpo-" <> "#{Mix.env()}", s3_resource_key) |> ExAws.request() do
+      {:ok, resp} ->
+        conn
+        |> put_resp_content_type("image/png")
+        |> send_resp(:ok, resp.body)
+
+      {:error, _resp} ->
+        send_resp(conn, :not_found, "")
+    end
   end
 
   @apidoc

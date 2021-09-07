@@ -138,16 +138,40 @@ defmodule Nexpo.Support.View do
         }
 
       :logo_url ->
-        %{:logo_url => Nexpo.CompanyLogo.url(get_url(object, relation), :original)}
+        case Nexpo.CompanyLogo.url(get_url(object, relation), :original) do
+          nil ->
+            %{:logo_url => nil}
+
+          url ->
+            %{:logo_url => Application.get_env(:nexpo, :backend_url) <> "/api/uploads" <> Enum.at(String.split(url, "uploads"), 1)}
+        end
 
       :profile_image ->
-        %{:profile_image => Nexpo.ProfileImage.url(get_url(object, relation), :original)}
+        case Nexpo.ProfileImage.url(get_url(object, relation), :original) do
+          nil ->
+            %{:profile_image => nil}
+
+          url ->
+            %{:profile_image => Application.get_env(:nexpo, :backend_url) <> "/api/uploads" <> Enum.at(String.split(url, "uploads"), 1)}
+        end
 
       :resume_en_url ->
-        %{:resume_en_url => Nexpo.CvEn.url(get_url(object, relation), :original)}
+        case Nexpo.CvEn.url(get_url(object, relation), :original) do
+          nil ->
+            %{:resume_en_url => nil}
+
+          url ->
+            %{:resume_en_url => Application.get_env(:nexpo, :backend_url) <> "/api/uploads" <> Enum.at(String.split(url, "uploads"), 1)}
+        end
 
       :resume_sv_url ->
-        %{:resume_sv_url => Nexpo.CvSv.url(get_url(object, relation), :original)}
+        case Nexpo.CvSv.url(get_url(object, relation), :original) do
+          nil ->
+            %{:resume_sv_url => nil}
+
+          url ->
+            %{:resume_sv_url => Application.get_env(:nexpo, :backend_url) <> "/api/uploads" <> Enum.at(String.split(url, "uploads"), 1)}
+        end
 
       _ ->
         %{}
@@ -158,4 +182,5 @@ defmodule Nexpo.Support.View do
     file_name = Map.from_struct(object) |> get_in([attribute, :file_name])
     {file_name, object}
   end
+
 end

@@ -3,7 +3,7 @@ defmodule Nexpo.EventInfoView do
 
   def render("event_info.json", %{event_info: event_info}) do
     # Define own parameters to keep
-    base = [:id, :host, :description, :language, :tickets]
+    base = [:id, :host, :description, :language, :capacity]
 
     Nexpo.Support.View.render_object(event_info, base)
   end

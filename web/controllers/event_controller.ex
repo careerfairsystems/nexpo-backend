@@ -32,7 +32,9 @@ defmodule Nexpo.EventController do
         "location": "Outside Kårhuset, bus to Malmö",
         "id": 1,
         "end": "17:30",
-        "date": "Nov 3rd - Sunday"
+        "date": "Nov 3rd - Sunday",
+        "capacity": 20,
+        "tickets": 2
       },
       {
         "start": "17:15",
@@ -40,16 +42,38 @@ defmodule Nexpo.EventController do
         "location": "Kårhuset: Auditorium",
         "id": 2,
         "end": "18:45",
-        "date": "Nov 4rd - Monday"
+        "date": "Nov 4rd - Monday",
+        "capacity": 20,
+        "tickets": 10
       }
     ]
   }
 
   """
-  def index(conn, %{}, _user, _claims) do
-    events = Repo.all(Event)
+  def mutate_event(event) do
+    tickets = Enum.count(event.event_tickets)
+    capacity = event.event_info.capacity
 
-    render(conn, "index.json", events: events)
+    Map.delete(event, :event_tickets)
+    |> Map.delete(:event_info)
+    |> Map.merge(%{
+      tickets: tickets,
+      capacity: capacity
+    })
+  end
+
+  def index(conn, %{}, _user, _claims) do
+    events =
+      Repo.all(Event)
+
+    events = Repo.preload(events, [
+      :event_tickets,
+      :event_info
+    ])
+
+    reduced_events = Enum.map(events, fn event -> mutate_event(event) end)
+
+    render(conn, "index.json", events: reduced_events)
   end
 
   @apidoc """
@@ -62,13 +86,13 @@ defmodule Nexpo.EventController do
   HTTP 200 OK
   {
     "data": {
-      "tickets_left": 19,
+      "tickets": 19,
       "start": "15:10",
       "name": "Bounce",
       "location": "Outside Kårhuset, bus to Malmö",
       "id": 1,
       "event_info": {
-        "tickets": 20,
+        "capacity": 20,
         "language": null,
         "id": 1,
         "host": null,
@@ -87,22 +111,21 @@ defmodule Nexpo.EventController do
       Repo.get!(Event, event_id)
       |> Repo.preload([:event_info, :event_tickets])
 
-    tickets_left = event.event_info.tickets - Enum.count(event.event_tickets)
+    tickets = Enum.count(event.event_tickets)
 
-    event =
-      Map.delete(event, :event_tickets)
-      |> Map.merge(%{
-        tickets_left: tickets_left
-      })
+    reduced_event = Map.delete(event, :event_tickets)
+    |> Map.merge(%{
+      tickets: tickets,
+    })
 
-    case event do
+    case reduced_event do
       nil ->
         conn
         |> put_status(404)
         |> render(Nexpo.ErrorView, "404.json")
 
-      event ->
-        render(conn, "show.json", event: event)
+      reduced_event ->
+        render(conn, "show.json", event: reduced_event)
     end
   end
 
@@ -188,7 +211,7 @@ defmodule Nexpo.EventController do
   @apiParam {Integer} event_id    Id of event
   @apiParam {Boolean} photo    If student allows taking photos of themselves
   @apiParamExample {json} Request-Example:
-                 { 
+                 {
                    "event_id": 1
                    "photo": true
                  }

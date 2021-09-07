@@ -1,8 +1,9 @@
 # App artifacts
 /_build
+/docs
+/s3bucket
 /db
 /deps
-/docs
 /*.ez
 
 

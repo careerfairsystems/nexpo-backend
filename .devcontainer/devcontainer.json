@@ -12,7 +12,7 @@
 			"previewLimit": 50,
 			"server": "localhost",
 			"port": 5432,
-			"database": "nexpo",
+			"database": "nexpo-dev",
 			"username": "nexpo",
 			"password": "nexpo"
 		}]
@@ -28,7 +28,7 @@
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [4000, 4001, 5432],
+	"forwardPorts": [4000, 4001, 5432, 5433, 4567],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "npm run setup",

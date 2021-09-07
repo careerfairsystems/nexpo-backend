@@ -24,7 +24,7 @@ defmodule Nexpo.Company do
     has_many(:student_session_applications, Nexpo.StudentSessionApplication)
     has_many(:student_session_time_slots, Nexpo.StudentSessionTimeSlot)
 
-    has_many(:blips, Nexpo.Blip)
+    has_many(:blips, Nexpo.Blip, on_delete: :delete_all)
 
     many_to_many(:industries, Nexpo.Industry, join_through: "companies_industries")
     many_to_many(:job_offers, Nexpo.JobOffer, join_through: "companies_job_offers")
