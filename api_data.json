@@ -1918,7 +1918,7 @@
       "examples": [
         {
           "title": "Success",
-          "content": "\nHTTP 200 OK\n{\n  \"data\": {\n    \"tickets_left\": 19,\n    \"start\": \"15:10\",\n    \"name\": \"Bounce\",\n    \"location\": \"Outside Kårhuset, bus to Malmö\",\n    \"id\": 1,\n    \"event_info\": {\n      \"tickets\": 20,\n      \"language\": null,\n      \"id\": 1,\n      \"host\": null,\n      \"description\": \"Placeholder\"\n    },\n    \"end\": \"17:30\",\n    \"date\": \"Nov 3rd - Sunday\"\n  }\n}",
+          "content": "\nHTTP 200 OK\n{\n  \"data\": {\n    \"tickets\": 19,\n    \"start\": \"15:10\",\n    \"name\": \"Bounce\",\n    \"location\": \"Outside Kårhuset, bus to Malmö\",\n    \"id\": 1,\n    \"event_info\": {\n      \"capacity\": 20,\n      \"language\": null,\n      \"id\": 1,\n      \"host\": null,\n      \"description\": \"Placeholder\"\n    },\n    \"end\": \"17:30\",\n    \"date\": \"Nov 3rd - Sunday\"\n  }\n}",
           "type": "json"
         }
       ]
@@ -1986,7 +1986,7 @@
       "examples": [
         {
           "title": "Success",
-          "content": "\nHTTP 200 OK\n{\n  \"data\": [\n    {\n      \"start\": \"15:10\",\n      \"name\": \"Bounce\",\n      \"location\": \"Outside Kårhuset, bus to Malmö\",\n      \"id\": 1,\n      \"end\": \"17:30\",\n      \"date\": \"Nov 3rd - Sunday\"\n    },\n    {\n      \"start\": \"17:15\",\n      \"name\": \"The digital shift - how will you be affected?\",\n      \"location\": \"Kårhuset: Auditorium\",\n      \"id\": 2,\n      \"end\": \"18:45\",\n      \"date\": \"Nov 4rd - Monday\"\n    }\n  ]\n}",
+          "content": "\nHTTP 200 OK\n{\n  \"data\": [\n    {\n      \"start\": \"15:10\",\n      \"name\": \"Bounce\",\n      \"location\": \"Outside Kårhuset, bus to Malmö\",\n      \"id\": 1,\n      \"end\": \"17:30\",\n      \"date\": \"Nov 3rd - Sunday\",\n      \"capacity\": 20,\n      \"tickets\": 2\n    },\n    {\n      \"start\": \"17:15\",\n      \"name\": \"The digital shift - how will you be affected?\",\n      \"location\": \"Kårhuset: Auditorium\",\n      \"id\": 2,\n      \"end\": \"18:45\",\n      \"date\": \"Nov 4rd - Monday\",\n      \"capacity\": 20,\n      \"tickets\": 10\n    }\n  ]\n}",
           "type": "json"
         }
       ]
@@ -2024,7 +2024,7 @@
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{ \n  \"event_id\": 1\n  \"photo\": true\n}",
+          "content": "{\n  \"event_id\": 1\n  \"photo\": true\n}",
           "type": "json"
         }
       ]
