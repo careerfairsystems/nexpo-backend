@@ -59,7 +59,7 @@ defmodule Nexpo.Mixfile do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 1.0"},
       {:ex_machina, "~> 2.0"},
-      {:poison, "~> 2.0"},
+      {:poison, "~> 3.1"},
       {:mix_test_watch, "~> 0.3", only: :dev, runtime: false},
       {:cors_plug, "~> 2.0"},
       {:ex_json_schema, "~> 0.5.4"},
