@@ -256,8 +256,9 @@ defmodule Nexpo.CompanyController do
   @apiUse UnauthorizedError
   @apiUse UnprocessableEntity
   """
-  def update(conn, %{"id" => id, "company" => company_params}, _user, _claims) do
-    company = Repo.get!(Company, id) |> Repo.preload(:student_session_time_slots)
+  @spec update(any, any, any, any) :: none
+  def update(%Plug.Conn{body_params: %{"company" => company_params}, path_params: %{"id" => company_id}} = conn, _nothing_here, _user, _claims) do
+    company = Repo.get!(Company, company_id) |> Repo.preload(:student_session_time_slots)
 
     # We need to set "null" to nil, since FormData can't send null values
     null_params =
@@ -464,14 +465,6 @@ defmodule Nexpo.CompanyController do
   @apiUse NotFoundError
   @apiUse InternalServerError
   """
-  def get_logo(conn, %{"id" => id}, _user, _claims) do
-    path = "uploads/companies/#{id}/logo/logo.png"
-
-    conn
-    |> put_resp_content_type("image/png")
-    |> send_file(200, path)
-  end
-
   def get_logo2(conn, %{"id" => company_id, "key" => image_key}, _user, _claims) do
     s3_resource_key = "uploads/companies/#{company_id}/logo/#{image_key}"
 

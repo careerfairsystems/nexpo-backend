@@ -585,14 +585,6 @@ defmodule Nexpo.UserController do
     end
   end
 
-  def get_picture(conn, %{}, user, _claims) do
-    path = "uploads/users/#{user.id}/image/profile.png"
-
-    conn
-    |> put_resp_content_type("image/png")
-    |> send_file(200, path)
-  end
-
   def get_picture2(conn, %{"id" => user_id, "key" => image_key}, _user, _claims) do
     s3_resource_key = "uploads/users/#{user_id}/image/#{image_key}"
 
