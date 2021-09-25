@@ -18,5 +18,7 @@ RUN mix local.hex --force && \
 
 # Setup database and start dev server on image run
 CMD mix ecto.setup && \
+    mix ecto.reset && \
     mix run priv/repo/seeds.exs && \
     npm run dev
+

@@ -460,7 +460,7 @@ alias Nexpo.Event
 event1 =
   Repo.insert!(%Event{
     name: "Bounce",
-    date: "Nov 3rd - Sunday",
+    date: "2021-11-03",
     start: "15:10",
     end: "17:30",
     location: "Outside Kårhuset, bus to Malmö"
@@ -469,7 +469,7 @@ event1 =
 event2 =
   Repo.insert!(%Event{
     name: "The digital shift - how will you be affected?",
-    date: "Nov 4rd - Monday",
+    date: "2021-11-04",
     start: "17:15",
     end: "18:45",
     location: "Kårhuset: Auditorium"
@@ -478,7 +478,7 @@ event2 =
 event3 =
   Repo.insert!(%Event{
     name: "Stand up with Hasse Brontén",
-    date: "Nov 5rd - Tuesday",
+    date: "2021-11-05",
     start: "17:15",
     end: "18:00",
     location: "Kårhuset: Auditorium"
@@ -487,7 +487,7 @@ event3 =
 event4 =
   Repo.insert!(%Event{
     name: "Personal development and a positive mindset",
-    date: "Nov 6rd - Wednesday",
+    date: "2021-11-06",
     start: "17:15",
     end: "18:45",
     location: "Kårhuset: Auditorium"
