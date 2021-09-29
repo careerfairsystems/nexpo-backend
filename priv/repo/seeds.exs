@@ -295,21 +295,21 @@ alias Nexpo.StudentSessionApplication
 
 # Student 1
 Repo.insert!(%StudentSessionApplication{
-  motivation: "",
+  motivation: "company1student1",
   student_id: 1,
   company_id: 1,
   score: 5
 })
 
 Repo.insert!(%StudentSessionApplication{
-  motivation: "",
+  motivation: "company2student1",
   student_id: 1,
   company_id: 2,
   score: 4
 })
 
 Repo.insert!(%StudentSessionApplication{
-  motivation: "",
+  motivation: "company3student1",
   student_id: 1,
   company_id: 3,
   score: 5
@@ -317,21 +317,21 @@ Repo.insert!(%StudentSessionApplication{
 
 # Student 2
 Repo.insert!(%StudentSessionApplication{
-  motivation: "",
+  motivation: "company1student2",
   student_id: 2,
   company_id: 1,
   score: 2
 })
 
 Repo.insert!(%StudentSessionApplication{
-  motivation: "",
+  motivation: "Company2Student2",
   student_id: 2,
   company_id: 2,
   score: 5
 })
 
 Repo.insert!(%StudentSessionApplication{
-  motivation: "",
+  motivation: "company3student2",
   student_id: 2,
   company_id: 3,
   score: 1
@@ -339,21 +339,21 @@ Repo.insert!(%StudentSessionApplication{
 
 # Student 3
 Repo.insert!(%StudentSessionApplication{
-  motivation: "",
+  motivation: "company1student3",
   student_id: 3,
   company_id: 1,
   score: 2
 })
 
 Repo.insert!(%StudentSessionApplication{
-  motivation: "",
+  motivation: "company2student3",
   student_id: 3,
   company_id: 2,
   score: 3
 })
 
 Repo.insert!(%StudentSessionApplication{
-  motivation: "",
+  motivation: "company3student3",
   student_id: 3,
   company_id: 3,
   score: 4
