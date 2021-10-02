@@ -2,8 +2,7 @@ defmodule Nexpo.User do
   use Nexpo.Web, :model
   use Arc.Ecto.Schema
 
-  alias Nexpo.Repo
-  alias Nexpo.User
+  alias Nexpo.{Repo, User, ProfileImage}
 
   schema "users" do
     field(:first_name, :string)
@@ -29,11 +28,27 @@ defmodule Nexpo.User do
     struct
     |> cast(params, [:email, :password, :first_name, :last_name])
     |> cast(params, [:food_preferences, :phone_number])
-    |> cast_attachments(params, [:profile_image])
+    |> handle_profile_image(struct, params)
     |> unique_constraint(:email)
     |> validate_length(:password, min: 6)
     |> hash_password(params)
     |> validate_required([:email, :hashed_password])
+  end
+
+  def handle_profile_image(changeset, user, params) do
+    case Map.get(params, "profile_image") do
+      "null" ->
+        IO.inspect("delete profile")
+        case Map.get(user, :profile_image) do
+          nil -> changeset
+          existing_file ->
+            ProfileImage.delete({existing_file, user})
+            put_change(changeset, :profile_image, nil)
+        end
+
+      new_file ->
+        cast_attachments(changeset, params, [:profile_image])
+    end
   end
 
   def get_permissions(user) do

@@ -389,12 +389,6 @@ defmodule Nexpo.UserController do
   def update_me(conn, %{"user" => user_params}, user, _claims) do
     changeset = User.changeset(user, user_params)
 
-    Map.keys(user_params)
-    |> Enum.filter(fn k -> k in ["profile_image"] end)
-    |> Enum.each(fn k ->
-      delete_file?(user, user_params, String.to_atom(k))
-    end)
-
     case Repo.update(changeset) do
       {:ok, user} ->
         render(conn, "show.json", user: user)
